@@ -3,11 +3,11 @@ import React from 'react';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import Home from '../screens/Home';
 import Setting from '../screens/Setting';
-import Icon from 'react-native-vector-icons/Ionicons';
 import IconFeather from 'react-native-vector-icons/Feather';
 import NewOrder from '../screens/NewOrder';
 import Notification from '../screens/Notification';
 import Bag from '../screens/Bag';
+import ISNEW from '../utils/constants';
 
 const BottomTab = createBottomTabNavigator();
 
@@ -37,11 +37,14 @@ const BottomTabs = () => {
         options={() => {
           return {
             tabBarShowLabel: false,
-            tabBarIcon: ({focused}) => (
-              <IconFeather
-                style={focused ? styles.iconFocused : styles.iconUnfocused}
-                name="bell"
-              />
+            tabBarIcon: ({focused, isNew=ISNEW}) => (
+              <View style={{position: 'relative'}}>
+                <IconFeather
+                  style={focused ? styles.iconFocused : styles.iconUnfocused}
+                  name="bell"
+                />
+                {isNew ? <View style={styles.newNotification}></View> : ''}
+              </View>
             ),
             headerShown: false,
           };
@@ -55,10 +58,7 @@ const BottomTabs = () => {
           return {
             tabBarShowLabel: false,
             tabBarIcon: () => (
-              <IconFeather
-                style={styles.iconCenter}
-                name="plus-square"
-              />
+              <IconFeather style={styles.iconCenter} name="plus-square" />
             ),
             headerShown: false,
           };
@@ -119,5 +119,13 @@ const styles = StyleSheet.create({
   iconUnfocused: {
     color: '#090F4773',
     fontSize: 30,
+  },
+  newNotification: {
+    position: 'absolute',
+    width: 10,
+    height: 10,
+    backgroundColor: '#FF0000',
+    right: 5,
+    borderRadius: 5,
   }
 });

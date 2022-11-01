@@ -1,12 +1,13 @@
 // In App.js in a new project
 
 import * as React from 'react';
-import {Text, TouchableOpacity} from 'react-native';
+import {Button, Text, TouchableOpacity, View, StyleSheet} from 'react-native';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import Login from './src/screens/Auth/Login';
 import BottomTabs from './src/navigation/BottomTabs';
 import ProductDetail from './src/screens/Home/components/ProductDetail';
+import Icon from 'react-native-vector-icons/Feather';
 
 const Stack = createNativeStackNavigator();
 
@@ -43,8 +44,34 @@ function App() {
           options={({route, navigation}) => {
             return {
               headerTitleAlign: 'center',
-              title: route?.params?.headerTitle,
-              // title: 'Product 1',
+              headerTitle: route?.params?.headerTitle,
+              headerLeft: () => (
+                <Icon
+                  name="arrow-left"
+                  size={30}
+                  color="#090F47"
+                  onPress={() => navigation.goBack(null)}
+                />
+              ),
+              headerRight: () => (
+                <View style={{display: 'flex', flexDirection: 'row', }} >
+                  <TouchableOpacity style={{position: 'relative', marginRight: 26}}>
+                    <Icon size={30} color="#090F47" name="bell"
+                    onPress={()=>{
+                      navigation.navigate('NotificationTab');
+                    }} />
+                    {route.params.isNew ? <View style={styles.newNotification}></View> : ''}
+                  </TouchableOpacity>
+                  <Icon
+                    name='shopping-bag'
+                    size={30}
+                    color='#090F47'
+                    onPress={()=>{
+                      navigation.navigate('BagTab');
+                    }}
+                  />
+                </View>
+              ),
             };
           }}
           name={'ProductDetail'}
@@ -55,4 +82,14 @@ function App() {
   );
 }
 
+const styles = StyleSheet.create({
+  newNotification: {
+    position: 'absolute',
+    width: 10,
+    height: 10,
+    backgroundColor: '#FF0000',
+    right: 5,
+    borderRadius: 5,
+  },
+});
 export default App;
