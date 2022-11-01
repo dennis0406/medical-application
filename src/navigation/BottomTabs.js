@@ -4,6 +4,7 @@ import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import Home from '../screens/Home';
 import Setting from '../screens/Setting';
 import Icon from 'react-native-vector-icons/Ionicons';
+import IconFeather from 'react-native-vector-icons/Feather';
 import NewOrder from '../screens/NewOrder';
 import Notification from '../screens/Notification';
 import Bag from '../screens/Bag';
@@ -12,8 +13,7 @@ const BottomTab = createBottomTabNavigator();
 
 const BottomTabs = () => {
   return (
-    <BottomTab.Navigator
-      sceneContainerStyle={({backgroundColor: 'white'}, {height: 100})}>
+    <BottomTab.Navigator sceneContainerStyle={{backgroundColor: 'white'}}>
       <BottomTab.Screen
         name="HomeTab"
         component={Home}
@@ -21,10 +21,9 @@ const BottomTabs = () => {
           return {
             tabBarShowLabel: false,
             tabBarIcon: ({focused}) => (
-              <Icon
-                style={{color: focused ? '#4157FF' : '#090F4773'}}
-                name="home-outline"
-                size={18}
+              <IconFeather
+                style={focused ? styles.iconFocused : styles.iconUnfocused}
+                name="home"
               />
             ),
             headerShown: false,
@@ -39,10 +38,9 @@ const BottomTabs = () => {
           return {
             tabBarShowLabel: false,
             tabBarIcon: ({focused}) => (
-              <Icon
-                style={{color: focused ? '#4157FF' : '#090F4773'}}
-                name="notifications-outline"
-                size={18}
+              <IconFeather
+                style={focused ? styles.iconFocused : styles.iconUnfocused}
+                name="bell"
               />
             ),
             headerShown: false,
@@ -56,11 +54,10 @@ const BottomTabs = () => {
         options={() => {
           return {
             tabBarShowLabel: false,
-            tabBarIcon: ({focused}) => (
-              <Icon
-                style={{color: focused ? '#4157FF' : '#090F4773'}}
-                name="add-circle-outline"
-                size={18}
+            tabBarIcon: () => (
+              <IconFeather
+                style={styles.iconCenter}
+                name="plus-square"
               />
             ),
             headerShown: false,
@@ -75,10 +72,9 @@ const BottomTabs = () => {
           return {
             tabBarShowLabel: false,
             tabBarIcon: ({focused}) => (
-              <Icon
-                style={{color: focused ? '#4157FF' : '#090F4773'}}
-                name="archive-outline"
-                size={18}
+              <IconFeather
+                style={focused ? styles.iconFocused : styles.iconUnfocused}
+                name="shopping-bag"
               />
             ),
             headerShown: false,
@@ -93,10 +89,9 @@ const BottomTabs = () => {
           return {
             tabBarShowLabel: false,
             tabBarIcon: ({focused}) => (
-              <Icon
-                style={{color: focused ? '#4157FF' : '#090F4773'}}
-                name="person-outline"
-                size={18}
+              <IconFeather
+                style={focused ? styles.iconFocused : styles.iconUnfocused}
+                name="user"
               />
             ),
             headerShown: false,
@@ -109,4 +104,20 @@ const BottomTabs = () => {
 
 export default BottomTabs;
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+  iconCenter: {
+    backgroundColor: '#4157FF',
+    padding: 10,
+    fontSize: 30,
+    borderRadius: 4,
+    color: '#FFFFFF',
+  },
+  iconFocused: {
+    color: '#4157FF',
+    fontSize: 30,
+  },
+  iconUnfocused: {
+    color: '#090F4773',
+    fontSize: 30,
+  }
+});

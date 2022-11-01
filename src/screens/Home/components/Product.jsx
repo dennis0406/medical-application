@@ -1,13 +1,23 @@
-import {View, Text, Image, StyleSheet} from 'react-native';
+import {View, Text, Image, StyleSheet, TouchableOpacity} from 'react-native';
 import React from 'react';
 import Icon from 'react-native-vector-icons/Ionicons';
 
-const Product = props => {
-  const saleStyle = typeof props.sale == 'number' ? styles.product__sale__number: styles.product__sale;
+const Product = (props, {navigation}) => {
+  const saleStyle =
+    typeof props.sale == 'number'
+      ? styles.product__sale__number
+      : styles.product__sale;
   return (
-    <View style={ props.bottom ? styles.productBot: styles.product}>
+    <TouchableOpacity style={props.bottom ? styles.productBot : styles.product}
+      onPress={() => {
+          navigation.navigate('ProductDetail', {headerTitle: 'Product 2'});
+        }}
+    >
       <Image source={props.img} style={styles.product__img} />
-      <View style={props.bottom ? styles.product__contentBottom : styles.product__content}>
+      <View
+        style={
+          props.bottom ? styles.product__contentBottom : styles.product__content
+        }>
         <Text
           style={(styles.product__name, styles.black)}
           numberOfLines={2}
@@ -18,13 +28,13 @@ const Product = props => {
           {props.price || ''}
         </Text>
         <Text style={props.starNumber ? styles.star : styles.none}>
-        <Icon name='star' size={18} color='white' /> { + props.starNumber || ''}
+          <Icon name="star" size={18} color="white" /> {+props.starNumber || ''}
         </Text>
       </View>
       <Text style={props.sale ? saleStyle : styles.none}>
         {typeof props.sale == 'number' ? props.sale + '% off' : 'sale'}
       </Text>
-    </View>
+    </TouchableOpacity>
   );
 };
 
@@ -54,15 +64,15 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    paddingHorizontal: 15
+    paddingHorizontal: 15,
   },
   black: {
-    color: 'black'
+    color: 'black',
   },
 
   productBot: {
     marginBottom: 17,
-    width: 157,
+    width: 167,
     height: 250,
     backgroundColor: '#F5F7FA',
     overflow: 'hidden',
@@ -86,11 +96,11 @@ const styles = StyleSheet.create({
     left: -40,
     textAlign: 'center',
     textAlignVertical: 'bottom',
-    transform:  [{ rotate: "-45deg" }],
+    transform: [{rotate: '-45deg'}],
     padding: 40,
     paddingBottom: 10,
     fontWeight: '700',
-    color: '#fff'
+    color: '#fff',
   },
   product__sale__number: {
     backgroundColor: '#FFC618',
@@ -100,7 +110,7 @@ const styles = StyleSheet.create({
     left: -50,
     textAlign: 'center',
     textAlignVertical: 'center',
-    transform:  [{ rotate: "-45deg" }],
+    transform: [{rotate: '-45deg'}],
     padding: 40,
     paddingBottom: 10,
     fontWeight: '700',
@@ -114,7 +124,7 @@ const styles = StyleSheet.create({
     bottom: 15,
     borderBottomLeftRadius: 20,
     borderTopLeftRadius: 20,
-    padding: 5
+    padding: 5,
   },
-})
+});
 export default Product;
