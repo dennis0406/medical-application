@@ -51,6 +51,8 @@ const styles = StyleSheet.create({
     alignItems: 'flex-start',
     justifyContent: 'flex-start',
     paddingHorizontal: 24,
+    position: 'relative',
+    marginBottom: 70
   },
   slider: {
   },

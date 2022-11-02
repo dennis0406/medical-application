@@ -17,7 +17,7 @@ function App() {
       <Stack.Navigator
         screenOptions={({navigation}) => {
           return {
-            animation: 'fade_from_bottom',
+            animation: 'slide_from_right',
             headerLeft: () => {
               return (
                 <TouchableOpacity

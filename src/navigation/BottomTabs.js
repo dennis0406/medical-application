@@ -2,18 +2,20 @@ import {Image, StyleSheet, Text, View} from 'react-native';
 import React from 'react';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import Home from '../screens/Home';
-import Setting from '../screens/Setting';
 import IconFeather from 'react-native-vector-icons/Feather';
 import NewOrder from '../screens/NewOrder';
 import Notification from '../screens/Notification';
 import Bag from '../screens/Bag';
-import ISNEW from '../utils/constants';
+import {ISNEW} from '../utils/constants';
+import Profile from '../screens/Profile';
 
 const BottomTab = createBottomTabNavigator();
 
 const BottomTabs = () => {
   return (
-    <BottomTab.Navigator sceneContainerStyle={{backgroundColor: 'white'}}>
+    <BottomTab.Navigator
+      sceneContainerStyle={{backgroundColor: 'white'}}
+      screenOptions={{tabBarStyle: {position: 'absolute', bottom: 0, height: 70}}}>
       <BottomTab.Screen
         name="HomeTab"
         component={Home}
@@ -37,7 +39,7 @@ const BottomTabs = () => {
         options={() => {
           return {
             tabBarShowLabel: false,
-            tabBarIcon: ({focused, isNew=ISNEW}) => (
+            tabBarIcon: ({focused, isNew = ISNEW}) => (
               <View style={{position: 'relative'}}>
                 <IconFeather
                   style={focused ? styles.iconFocused : styles.iconUnfocused}
@@ -83,8 +85,8 @@ const BottomTabs = () => {
       />
 
       <BottomTab.Screen
-        name="SettingTab"
-        component={Setting}
+        name="Profile"
+        component={Profile}
         options={() => {
           return {
             tabBarShowLabel: false,
@@ -94,7 +96,7 @@ const BottomTabs = () => {
                 name="user"
               />
             ),
-            headerShown: false,
+            headerTitle: 'My Profile',
           };
         }}
       />
@@ -127,5 +129,5 @@ const styles = StyleSheet.create({
     backgroundColor: '#FF0000',
     right: 5,
     borderRadius: 5,
-  }
+  },
 });

@@ -2,7 +2,7 @@ import {View, Text, Image, StyleSheet, TouchableOpacity} from 'react-native';
 import React from 'react';
 import Icon from 'react-native-vector-icons/Ionicons';
 import { useNavigation } from '@react-navigation/native';
-import ISNEW from '../../../utils/constants';
+import {ISNEW} from '../../../utils/constants';
 
 const Product = (props) => {
   const navigation = useNavigation();
@@ -13,7 +13,7 @@ const Product = (props) => {
   return (
     <TouchableOpacity style={props.bottom ? styles.productBot : styles.product}
       onPress={() => {
-          navigation.navigate('ProductDetail', { isNew: ISNEW});
+          navigation.navigate('ProductDetail', { isNew: ISNEW, headerTitle: ''});
         }}
     >
       <Image source={props.img} style={styles.product__img} />

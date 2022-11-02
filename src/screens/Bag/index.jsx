@@ -4,7 +4,7 @@ import React from 'react';
 const Bag = () => {
   return (
     <View style={{alignItems: 'center', justifyContent: 'center', flex: 1}}>
-      <Text style={{fontSize: 24}}>Bag</Text>
+      <Text style={{fontSize: 24, color: 'black'}}>Bag</Text>
     </View>
   );
 };
