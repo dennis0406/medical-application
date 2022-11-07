@@ -1,5 +1,6 @@
 import {
   Button,
+  Dimensions,
   Image,
   StyleSheet,
   Text,
@@ -14,6 +15,8 @@ const Login = ({navigation}) => {
   const [userName, setUserName] = useState('');
   const [password, setPassword] = useState('');
   const [show, setShow] = useState(true);
+  const WIDTH = Dimensions.get('screen').width;
+  const HEIGHT = Dimensions.get('screen').height;
   return (
     <View style={styles.container}>
       <View style={styles.containerLeft}>
@@ -86,6 +89,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#ffff',
     paddingHorizontal: 24,
     height: '100%',
+
   },
   containerLeft: {
     display: 'flex',
