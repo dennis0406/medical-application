@@ -15,7 +15,7 @@ const BottomTabs = () => {
   return (
     <BottomTab.Navigator
       sceneContainerStyle={{backgroundColor: 'white'}}
-      screenOptions={{tabBarStyle: {position: 'absolute', bottom: 0, height: 70}}}>
+      screenOptions={{tabBarStyle: {position: 'absolute', bottom: 0, height: 60}}}>
       <BottomTab.Screen
         name="HomeTab"
         component={Home}
@@ -68,7 +68,7 @@ const BottomTabs = () => {
       />
 
       <BottomTab.Screen
-        name="BagTab"
+        name="MapView"
         component={Bag}
         options={() => {
           return {
@@ -76,7 +76,7 @@ const BottomTabs = () => {
             tabBarIcon: ({focused}) => (
               <IconFeather
                 style={focused ? styles.iconFocused : styles.iconUnfocused}
-                name="shopping-bag"
+                name="map"
               />
             ),
             headerShown: false,
@@ -113,10 +113,15 @@ const styles = StyleSheet.create({
     fontSize: 30,
     borderRadius: 4,
     color: '#FFFFFF',
+    position: 'absolute',
+    top: -20
   },
   iconFocused: {
     color: '#4157FF',
-    fontSize: 30,
+    fontSize: 35,
+    backgroundColor: '#FFC618',
+    padding: 10,
+    borderRadius: 50
   },
   iconUnfocused: {
     color: '#090F4773',

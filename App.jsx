@@ -6,8 +6,8 @@ import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import Login from './src/screens/Auth/Login';
 import BottomTabs from './src/navigation/BottomTabs';
-import ProductDetail from './src/screens/Home/components/ProductDetail';
 import Icon from 'react-native-vector-icons/Feather';
+import ProductDetail from './src/screens/ProductDetail';
 
 const Stack = createNativeStackNavigator();
 
@@ -63,11 +63,11 @@ function App() {
                     {route.params.isNew ? <View style={styles.newNotification}></View> : ''}
                   </TouchableOpacity>
                   <Icon
-                    name='shopping-bag'
+                    name='map'
                     size={30}
                     color='#090F47'
                     onPress={()=>{
-                      navigation.navigate('BagTab');
+                      navigation.navigate('MapView');
                     }}
                   />
                 </View>

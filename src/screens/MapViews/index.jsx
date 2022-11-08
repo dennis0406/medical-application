@@ -1,15 +1,27 @@
 import MapView, {Marker, PROVIDER_GOOGLE} from 'react-native-maps'; // remove PROVIDER_GOOGLE import if not using Google Maps
 import {GooglePlacesAutocomplete} from 'react-native-google-places-autocomplete';
-import {View, StyleSheet} from 'react-native';
+import {View, StyleSheet, Button} from 'react-native';
 import {useRef, useState} from 'react';
+import Icon from 'react-native-vector-icons/Feather';
 const MapViews = () => {
   const mapRef = useRef(null);
   console.log(mapRef?.current);
 
   const [markerPosition, setMarkerPosition] = useState({
-    lat: 37.78825,
-    lng: -122.4324,
+    lat: 16.0589628,
+    lng: 108.2412514,
   });
+
+  const [mapType, setMapType] = useState("standard")
+  const shopRegion = {
+    latitude: 16.0589628,
+    longitude: 108.2412514,
+    latitudeDelta: 0.001,
+    longitudeDelta: 0.001,
+  };
+  const goToShop = () => {
+    mapRef.current.animateToRegion(shopRegion, 3 * 1000);
+  };
 
   return (
     <View style={styles.container}>
@@ -17,9 +29,13 @@ const MapViews = () => {
         ref={mapRef}
         provider={PROVIDER_GOOGLE} // remove if not using Google Maps
         style={styles.map}
+        mapType={mapType}
+        userInterfaceStyle="dark"
+        showsUserLocation={true}
+        showsIndoorLevelPicker={true}
         region={{
-          latitude: 37.78825,
-          longitude: -122.4324,
+          latitude: 16.059828,
+          longitude: 108.243605,
           latitudeDelta: 0.015,
           longitudeDelta: 0.0121,
         }}>
@@ -34,7 +50,7 @@ const MapViews = () => {
       <View style={styles.searchContainer}>
         <GooglePlacesAutocomplete
           styles={{textInput: styles.input}}
-          placeholder="Search"
+          placeholder="Search..."
           query={{
             key: 'AIzaSyAh0kuFq98yIUvqXinNbnEywzQ2gXhaJlc',
             language: 'en',
@@ -44,7 +60,6 @@ const MapViews = () => {
           onPress={(data, details = null) => {
             console.log('data', data);
             console.log('details', details);
-            console.log(JSON.stringify(details?.geometry?.location));
             const region = details?.geometry?.location;
             setMarkerPosition(region);
             mapRef?.current?.animateToRegion(
@@ -60,13 +75,29 @@ const MapViews = () => {
           onFail={error => console.error(error)}
         />
       </View>
+      <View style={styles.listIcons}>
+        <Icon
+          name="target"
+          size={35}
+          color="#4157FF"
+          style={styles.iconMap}
+          onPress={() => goToShop()}
+        />
+        <Icon
+          name="layers"
+          size={35}
+          color="#4157FF"
+          style={styles.iconMap}
+          onPress={() => {mapType=="standard" ? setMapType('satellite') : setMapType('standard') }}
+        />
+      </View>
     </View>
   );
 };
 const styles = StyleSheet.create({
   container: {
     ...StyleSheet.absoluteFillObject,
-    height: '90%',
+    height: '95%',
     justifyContent: 'flex-end',
     alignItems: 'center',
   },
@@ -77,7 +108,7 @@ const styles = StyleSheet.create({
     top: 3,
     position: 'absolute',
     width: '90%',
-    backgroundColor: '#ffffff',
+    backgroundColor: 'transparent',
     shadowColor: 'black',
     padding: 5,
     borderRadius: 10,
@@ -89,7 +120,22 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderRadius: 8,
     borderColor: '#8888',
+    backgroundColor: 'transparent',
+    fontWeight: '600'
   },
+  iconMap: {
+    backgroundColor: '#ffff',
+    padding: 5,
+    borderRadius: 10,
+    marginBottom: 6
+  },
+  listIcons: {
+    display: 'flex',
+    flexDirection: 'column',
+    position: 'absolute',
+    bottom: 40,
+    right: 20,
+  }
 });
 
 export default MapViews;

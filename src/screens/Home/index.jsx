@@ -52,7 +52,7 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-start',
     paddingHorizontal: 24,
     position: 'relative',
-    marginBottom: 70
+    marginBottom: 60
   },
   slider: {
   },
